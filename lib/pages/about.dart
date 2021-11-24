@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
+import 'package:tba/services/date_time_helper.dart'; 
 import 'package:tba/shared/bottom_nav_bar.dart';
 import 'package:tba/styles/style.dart';
 
@@ -7,6 +8,7 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String _currentYear = DateTimeHelper().currentYear(DateTime.now());
     return Scaffold(
       appBar: AppBar(
         title: Text('About app', style: AppBarTitleStyle,), 
@@ -26,7 +28,7 @@ class AboutPage extends StatelessWidget {
                 child: Text('phita is a simple app aiming to help transporters, transport workers and other transport-related businesses keep track of their finances, better manage and organize their daily operations.', textAlign: TextAlign.center,),), 
               Container(
                 margin: EdgeInsets.only(top: 100.0),
-                child: Text('\u00A9 Phil Transport Solutions Ltd.'),)  
+                child: Text('\u00A9 $_currentYear Phil Transport Solutions Ltd.'),)  
             ],
           ),),),
           bottomNavigationBar: BottomNavBar(), 

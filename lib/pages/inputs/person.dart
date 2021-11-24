@@ -53,12 +53,12 @@ class _PersonFormState extends State<PersonForm> {
     SharedPreferencesHelper().readData('personData').then((value) {
       setState(() {
         if (value != null) {
-          _surname.text = DataParser().strToMap(value)['surname'];
-          _givenNames.text = DataParser().strToMap(value)['given_names'];
-          _address.text = DataParser().strToMap(value)['address'];
-          _city.text = DataParser().strToMap(value)['city'];
-          _phone.text = DataParser().strToMap(value)['phone'];
-          _email.text = DataParser().strToMap(value)['email'];
+          _surname.text = DataParser().strToMap(value)['surname'] ?? '';
+          _givenNames.text = DataParser().strToMap(value)['given_names'] ?? '';
+          _address.text = DataParser().strToMap(value)['address'] ?? '';
+          _city.text = DataParser().strToMap(value)['city'] ?? '';
+          _phone.text = DataParser().strToMap(value)['phone'] ?? '';
+          _email.text = DataParser().strToMap(value)['email'] ?? '';
           _role = DataParser().strToMap(value)['role'];
         }
       });

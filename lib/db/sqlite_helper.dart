@@ -76,8 +76,8 @@ class SQLiteDatabaseHelper {
   Future<List<Record>> getAllRows() async {
     final Database? db = await initializeDB();
     if (db != null) {
-      /* String sql = 'SELECT * FROM $bkTable ORDER BY datetime(created_at) DESC'; */
-      String sql = 'SELECT * FROM $bkTable ORDER BY id DESC';
+      String sql = 'SELECT * FROM $bkTable ORDER BY datetime(created_at) DESC';
+      // String sql = 'SELECT * FROM $bkTable ORDER BY id DESC';
       List<Map<String, Object?>> qResult = await db.rawQuery(sql);
       return qResult.map((e) => Record.fromMap(e)).toList();
     } else {

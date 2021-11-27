@@ -4,6 +4,7 @@ import 'package:tba/services/router.dart';
 import 'package:tba/pages/inputs/person.dart';
 import 'package:tba/pages/about.dart';
 import 'package:tba/pages/records/vehicle.dart';
+import 'package:tba/shared/dialogs.dart';
 import 'package:tba/styles/colors.dart';
 
 class SideMenu extends StatelessWidget {
@@ -46,7 +47,21 @@ class SideMenu extends StatelessWidget {
                   style: TextStyle(color: Colors.blue[900]),
                 ),
                 onTap: () =>
-                    PageRouter().navigateToPage(StoredVehiclePage(), context)), 
+                    PageRouter().navigateToPage(StoredVehiclePage(), context)),
+            ListTile(
+              leading: Icon(
+                Icons.folder_open,
+                color: myBlue,
+              ),
+              title: Text(
+                'Documents',
+                style: TextStyle(color: Colors.blue[900]),
+              ),
+              onTap: () => showDialog(
+                  context: context,
+                  builder: (_) => InfoDialog(),
+                  barrierDismissible: false),
+            ),
             ListTile(
                 leading: Icon(
                   Icons.language,
@@ -57,7 +72,7 @@ class SideMenu extends StatelessWidget {
                   style: TextStyle(color: Colors.blue[900]),
                 ),
                 onTap: () =>
-                    PageRouter().navigateToPage(CountryPage(), context)),        
+                    PageRouter().navigateToPage(CountryPage(), context)),
             ListTile(
               leading: Icon(
                 Icons.info,
@@ -75,4 +90,3 @@ class SideMenu extends StatelessWidget {
     );
   }
 }
-

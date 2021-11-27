@@ -5,7 +5,6 @@ class MyItemList {
     List<DropdownMenuItem<String>> incomeList = [
       DropdownMenuItem(value: 'none', child: Container(child: Text(''),)), 
       DropdownMenuItem(value: 'delivery_service', child: Container(child: Text('Delivery service', style: DropdownListStyle),)), 
-      DropdownMenuItem(value: 'luggage', child: Container(child: Text('Luggage', style: DropdownListStyle),)), 
       DropdownMenuItem(value: 'freight', child: Container(child: Text('Freight', style: DropdownListStyle),)), 
       DropdownMenuItem(value: 'luggage', child: Container(child: Text('Luggage', style: DropdownListStyle),)),
       DropdownMenuItem(value: 'passengers', child: Container(child: Text('Passengers', style: DropdownListStyle),)), 

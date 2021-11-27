@@ -8,14 +8,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+     final ThemeData myTheme = ThemeData();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+      theme: myTheme.copyWith(
+        colorScheme: myTheme.colorScheme.copyWith(
+          primary: myBlue, 
+          secondary: myBlue,),
+      ),
+      /* theme: ThemeData(
         primaryColor: myBlue,
         accentColor: myBlue,
         primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity, 
-      ),
+      ), */
       home: HomePage(),
     );
   }

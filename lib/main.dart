@@ -16,12 +16,6 @@ class MyApp extends StatelessWidget {
           primary: myBlue, 
           secondary: myBlue,),
       ),
-      /* theme: ThemeData(
-        primaryColor: myBlue,
-        accentColor: myBlue,
-        primarySwatch: Colors.indigo,
-        visualDensity: VisualDensity.adaptivePlatformDensity, 
-      ), */
       home: HomePage(),
     );
   }

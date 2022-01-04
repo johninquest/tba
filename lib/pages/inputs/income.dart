@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tba/shared/lists.dart';
 // import 'package:tba/styles/style.dart';
 import 'package:tba/db/sqlite_helper.dart';
@@ -39,8 +40,23 @@ class IncomeForm extends StatefulWidget {
 class _IncomeFormState extends State<IncomeForm> {
   final _incomeFormKey = GlobalKey<FormState>();
 
+    TextEditingController incomeDate = TextEditingController();
   String? incomeSource;
   String? incomeAmount;
+
+    DateTime selectedDate = DateTime.now();
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1990, 1),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        incomeDate.text = formatDisplayedDate('$picked');
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +74,18 @@ class _IncomeFormState extends State<IncomeForm> {
               padding: EdgeInsets.only(bottom: 20.0, top: 20.0),
               child: Text(DateTimeHelper().dateInWords(moment), style: TextStyle(fontWeight: FontWeight.bold, color: myGreen, fontSize: 18.0),),
             ),
+            Container(
+                width: MediaQuery.of(context).size.width * 0.95,
+                margin: EdgeInsets.only(bottom: 10.0),
+                padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: TextFormField(
+                  controller: incomeDate,
+                  enabled: true,
+                  readOnly: true,
+                  decoration: InputDecoration(labelText: 'Date'),
+                  keyboardType: TextInputType.number,
+                  onTap: () => _selectDate(context),
+                )),
               Container(
                 width: MediaQuery.of(context).size.width * 0.95, 
                 padding: EdgeInsets.only(left: 20.0, right: 20.0),
@@ -103,11 +131,14 @@ class _IncomeFormState extends State<IncomeForm> {
                     margin: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
                     child: ElevatedButton(
                       onPressed: () {
+                        String ts = DateTimeHelper().toDbFormat(moment);
+                      String userSelectedDate = DateTimeHelper()
+                          .localToDbFormat(incomeDate.text) ?? ts;
                         if (_incomeFormKey.currentState!.validate()) {
                           String parsedIncomeAmount =
                             InputHandler().moneyCheck(incomeAmount!);
                         SQLiteDatabaseHelper().insertRow('income',
-                          '$incomeSource', parsedIncomeAmount).then((value) {
+                          incomeSource ?? '', parsedIncomeAmount, userSelectedDate).then((value) {
                             if(value != null) {
                               SnackBarMessage().saveSuccess(context);
                               PageRouter().navigateToPage(AllRecords(), context);
@@ -127,5 +158,16 @@ class _IncomeFormState extends State<IncomeForm> {
         ),
       ),
     );
+  }
+}
+
+formatDisplayedDate(String dt) {
+  if (DateTime.tryParse(dt) != null && dt != '') {
+    DateTime parsedDatTime = DateTime.parse(dt);
+    DateFormat cmrDateFormat = DateFormat('dd/MM/yyyy');
+    String toCmrDateFormat = cmrDateFormat.format(parsedDatTime);
+    return toCmrDateFormat;
+  } else {
+    return '--/--/----';
   }
 }

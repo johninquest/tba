@@ -53,6 +53,25 @@ class DateTimeHelper {
     }
   }
 
+  toDbFormat(DateTime? inputDateTime) {
+    if (inputDateTime != null) {
+      String toDbFormat =
+          DateFormat('yyyy-MM-dd HH:mm:ss').format(inputDateTime);
+      return toDbFormat;
+    } else {
+      return '0000-00-00 00:00:00';
+    }
+  }
+
+  localToDbFormat(String? inputDateStr) {
+    if (inputDateStr != null && inputDateStr != '') {
+      DateTime inputToDateTime = DateFormat('dd/MM/yyyy').parse(inputDateStr);
+      String toDbFormat =
+          DateFormat('yyyy-MM-dd HH:mm:ss').format(inputToDateTime);
+      return toDbFormat;
+    }
+  }
+
   timestampAsString(DateTime datetime) {
     DateFormat dbDateTimeFormat = DateFormat('yyMMddHHmmss');
     DateTime dt = DateTime.now();

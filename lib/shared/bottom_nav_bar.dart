@@ -32,7 +32,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(
-            Icons.storage,
+            Icons.view_list,
             color: Colors.white,
             size: 25.0,
           ),

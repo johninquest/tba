@@ -1,7 +1,6 @@
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tba/db/models.dart';
-// import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'dart:io';
 
@@ -34,7 +33,6 @@ class SQLiteDatabaseHelper {
     final Database? db = await initializeDB();
     if (db != null) {
       List qData = ["$tCategory", "$tSource", "$tAmount", "$tDate"];
-      print('Query data => $qData');
       String sql =
           '''INSERT INTO $bkTable (category, source, amount, created_at) VALUES (?, ?, ?, ?)''';
       int qResult = await db.rawInsert(sql, qData);

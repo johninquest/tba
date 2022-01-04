@@ -24,3 +24,29 @@ class InfoDialog extends StatelessWidget {
     );
   }
 }
+
+
+class ErrorDialog extends StatelessWidget { 
+  final String errorMessage;
+  ErrorDialog(this.errorMessage);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Icon(Icons.report_outlined, color: myRed, size: 40.0,), 
+      content: Text(errorMessage, textAlign: TextAlign.center,), 
+      actions:[
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(), 
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('OK', style: TextStyle(fontSize: 20, color: myRed),),
+            ],
+          ))
+      ],
+      shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),  
+    );
+  }
+}
